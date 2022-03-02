@@ -1,4 +1,2 @@
 # social-network-app
-add .env file 
-then
-$ npm run start 
+add .env file in rest-api
