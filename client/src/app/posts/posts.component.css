@@ -13,19 +13,18 @@
     padding: 15px;
     position: relative;
 }
-.postInput{
+.postButton{
     background-color: rgba(73, 73, 73, 0.892);
     border-radius: 5%/50%;
     border: none;
-    height: 40px;
+    height: 45px;
     width: 80%;
-    padding: 15px;
+    text-align: left;
+    font-size: 17px;
+    color: whitesmoke;
 }
-.postInput:hover{
+.postButton:hover{
     background-color: rgba(99, 99, 99, 0.892);
-}
-.postInput::placeholder{
-    color: lightgray;
 }
 .options{
     border: none;
@@ -36,13 +35,35 @@
     height: 35px;
     width: 35px;
     font-size: 5px;
-    position: absolute;
-    right:15px;
-    top: 15px;
 }
 .options:hover{
     background-color: rgba(79, 79, 79, 0.892);
 }
 .options i{
     padding: 1px;
+}
+.modal-body{
+    background-color: rgba(53, 53, 53, 0.892);
+}
+.modal-footer{
+    background-color: rgba(53, 53, 53, 0.892);
+}
+.modal-header{
+    background-color: rgba(53, 53, 53, 0.892);
+}
+.modal-footer button{
+    width: 100%;
+}
+.text{
+    resize:none;
+    color: whitesmoke;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+li{
+    list-style: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }

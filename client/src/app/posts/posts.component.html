@@ -1,18 +1,33 @@
 <div class="posts">
     <div class="post">
-        <form #postForm="ngForm" (ngSubmit)="submit(postForm.value)">
-            <input type="text" ngModel name="text" class="postInput" placeholder="What's on your mind ?" />
-            <button type="submit" class="postButton">Submit</button>
-        </form>
+        <button type="button" class="postButton" (click)="openVerticallyCentered(content)">What's on your mind</button>
+        <ng-template #content let-modal class="modalWindow">
+            <div class="modal-header">Name
+            </div>
+            <form #postForm="ngForm" (ngSubmit)="submit(postForm.value)">
+                <div class="modal-body">
+                    <textarea rows="4" name="text" class="text" placeholder="What's on your mind" ngModel></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </form>
+        </ng-template>
     </div>
     <div class="post" *ngFor="let post of posts">
         <span>
             {{post.createdAt}}
-            <button class="options">
+            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+            <button  class="options" tabindex="0" ngbDropdownToggle id="navbarDropdown3">
                 <i class="fa fa-circle"></i>
-                <i class="fa fa-circle" ></i>
+                <i class="fa fa-circle"></i>
                 <i class="fa fa-circle"></i>
             </button>
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                <a ngbDropdownItem>Edit</a>
+                <a ngbDropdownItem >Delete</a>
+              </div>
+              </li>
         </span>
         <div>{{post.text}}</div>
     </div>

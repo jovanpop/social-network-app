@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-posts',
@@ -8,8 +9,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostsComponent implements OnInit {
   posts: any[]=[];
+  collapsed = true;
+  
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -29,5 +33,8 @@ export class PostsComponent implements OnInit {
         window.location.reload();
       }
     )
+  }
+  openVerticallyCentered(content:any) {
+    this.modalService.open(content, { centered: true });
   }
 }
