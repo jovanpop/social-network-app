@@ -1,6 +1,19 @@
 <div class="posts">
-    <div class="post" *ngFor = "let post of posts">
-            <p>{{post.createdAt}}</p>
+    <div class="post">
+        <form #postForm="ngForm" (ngSubmit)="submit(postForm.value)">
+            <input type="text" ngModel name="text" class="postInput" placeholder="What's on your mind ?" />
+            <button type="submit" class="postButton">Submit</button>
+        </form>
+    </div>
+    <div class="post" *ngFor="let post of posts">
+        <span>
+            {{post.createdAt}}
+            <button class="options">
+                <i class="fa fa-circle"></i>
+                <i class="fa fa-circle" ></i>
+                <i class="fa fa-circle"></i>
+            </button>
+        </span>
         <div>{{post.text}}</div>
     </div>
 </div>

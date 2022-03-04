@@ -17,8 +17,16 @@ export class PostsComponent implements OnInit {
   }
   getPosts(){
     this.httpClient.get<any>("http://localhost:4000/posts").subscribe(
-      response => {
-        this.posts= response;
+      res => {
+        this.posts= res;
+      }
+    )
+  }
+  submit(post:any){
+    this.httpClient.post("http://localhost:4000/posts",post).subscribe(
+      res=>{
+        console.log(res);
+        window.location.reload();
       }
     )
   }
