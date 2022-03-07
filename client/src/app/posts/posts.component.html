@@ -1,34 +1,58 @@
 <div class="posts">
     <div class="post">
-        <button type="button" class="postButton" (click)="openVerticallyCentered(content)">What's on your mind</button>
-        <ng-template #content let-modal class="modalWindow">
-            <div class="modal-header">Name
+        <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind
+            ?</button>
+        <ng-template #postMethod let-modal>
+            <div class="modalWindow">
+                <div class="modal-header">
+                    <div class="modalTitle">Create Post</div>
+                    <button type="button"(click)="modal.dismiss('Cross click')" class="closeButton">X</button>
+                </div>
+                <form #postForm="ngForm" (ngSubmit)="create(postForm.value);modal.dismiss('Cross click')">
+                    <div class="modal-body">
+                        <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
+                            ngModel=""></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
             </div>
-            <form #postForm="ngForm" (ngSubmit)="submit(postForm.value)">
-                <div class="modal-body">
-                    <textarea rows="4" name="text" class="text" placeholder="What's on your mind" ngModel></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Post</button>
-                </div>
-            </form>
         </ng-template>
     </div>
     <div class="post" *ngFor="let post of posts">
         <span>
             {{post.createdAt}}
             <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
-            <button  class="options" tabindex="0" ngbDropdownToggle id="navbarDropdown3">
-                <i class="fa fa-circle"></i>
-                <i class="fa fa-circle"></i>
-                <i class="fa fa-circle"></i>
-            </button>
-            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-                <a ngbDropdownItem>Edit</a>
-                <a ngbDropdownItem >Delete</a>
-              </div>
-              </li>
+                <div class="toggle" ngbDropdownToggle>
+                    <button class="options" tabindex="0" id="navbarDropdown3">
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                    </button>
+                </div>
+                <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                    <button type="button" (click)="openVerticallyCentered(patchMethod)" ngbDropdownItem>Edit</button>
+                    <button type="button" (click)="delete(post._id)" ngbDropdownItem>Delete</button>
+                </div>
+            </li>
         </span>
+        <ng-template #patchMethod let-modal>
+            <div class="modalWindow">
+                <div class="modal-header">Edit Post<button type="button" class="closeButton"
+                        (click)="modal.dismiss('Cross click')">X</button></div>
+                <form #patchForm="ngForm"
+                    (ngSubmit)="update({text:patchForm.value,id:post._id});modal.dismiss('Cross click')">
+                    <div class="modal-body">
+                        <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
+                            ngModel="{{post.text}}"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
         <div>{{post.text}}</div>
     </div>
 </div>

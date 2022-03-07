@@ -6,8 +6,8 @@ export class PostsController {
     constructor (private readonly postsService: PostsService){}
     @Post()
     async addPost(@Body('text') postText: string){
-        const generetedId = await this.postsService.insertPost(postText);
-        return {id: generetedId};
+        const generatedId = await this.postsService.insertPost(postText);
+        return {id: generatedId};
     }
     @Get()
     async allPosts (){
@@ -16,12 +16,12 @@ export class PostsController {
     }
     @Patch(":id")
     async patchPost(@Body('text') text: string, @Param("id") id: string){
-        await this.postsService.updatePost(text,id)
-        return ("Post updated");
+        await this.postsService.updatePost(text,id);
+        return  "Post updated" as string ;
     }
     @Delete(":id")
     async deletePost(@Param("id") id:string){
-        await this.postsService.deletePost(id)
-        return("Post deleted")
+        await this.postsService.deletePost(id);
+        return "Post deleted" as string;
     }
 }

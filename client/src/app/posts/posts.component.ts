@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -22,15 +22,34 @@ export class PostsComponent implements OnInit {
   getPosts(){
     this.httpClient.get<any>("http://localhost:4000/posts").subscribe(
       res => {
-        this.posts= res;
+        this.posts = res;
+        this.posts.forEach(post=>{
+          post.createdAt= new Date(post.createdAt).toDateString()+" at "+new Date(post.createdAt).getHours()+":"+new Date(post.createdAt).getMinutes();
+        })
       }
     )
   }
-  submit(post:any){
+  create(post:any){
     this.httpClient.post("http://localhost:4000/posts",post).subscribe(
       res=>{
         console.log(res);
-        window.location.reload();
+        this.getPosts();
+      }
+    )
+  }
+  delete(id:any){
+    this.httpClient.delete(`http://localhost:4000/posts/${id}`,{responseType: 'text'}).subscribe(
+      res=>{
+        console.log(res);
+        this.getPosts();
+      }
+    ) 
+  }
+  update(post:any){
+    this.httpClient.patch(`http://localhost:4000/posts/${post.id}`, post.text,{responseType: "text"}).subscribe(
+      res=>{
+        console.log(res);
+        this.getPosts();
       }
     )
   }

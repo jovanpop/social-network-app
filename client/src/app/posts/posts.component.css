@@ -43,13 +43,37 @@
     padding: 1px;
 }
 .modal-body{
-    background-color: rgba(53, 53, 53, 0.892);
+    background-color: transparent;
+    border-top: 1px solid rgba(99, 99, 99, 0.892);
 }
 .modal-footer{
-    background-color: rgba(53, 53, 53, 0.892);
+    background-color: transparent;
+    border: none;
 }
 .modal-header{
-    background-color: rgba(53, 53, 53, 0.892);
+    background-color: transparent;
+    margin: auto;
+    width:100%;
+    font-weight: 600;
+    font-size: 21px;
+    border: none;
+}
+.closeButton{
+    border-radius: 50%;
+    background-color: rgba(158, 158, 158, 0.892);
+    outline: none;
+    border: none;
+    color: whitesmoke;
+    height: 35px;
+    width: 35px;
+    font-size: 23px;
+    font-weight: 100;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    right: 20px;
+}
+.modal-header button:hover{
+    background-color: rgba(191, 191, 191, 0.892);
 }
 .modal-footer button{
     width: 100%;
@@ -60,10 +84,38 @@
     background-color: transparent;
     border: none;
     width: 100%;
+    outline: none;
 }
 li{
     list-style: none;
     position: absolute;
     top: 15px;
     right: 15px;
+}
+.modalWindow{
+    background-color: rgba(38, 38, 38);
+    border: 1px solid rgba(99, 99, 99, 0.289);
+}
+.toggle{
+    color: transparent;
+}
+.dropdown-menu{
+    background-color: rgba(38, 38, 38);
+    border: 1px solid rgba(99, 99, 99, 0.892);
+    padding: 10px;
+}
+.dropdown-menu button{
+    color: whitesmoke;
+    border-bottom: 1px solid rgba(99, 99, 99, 0.892);
+    height: 40px;
+}
+.dropdown-menu button:last-child{
+    border: none;
+}
+.dropdown-menu button:hover{
+    background-color: rgba(158, 158, 158, 0.892);
+    border-radius: 5%/10%;
+}
+.modalTitle{
+    margin: auto;
 }

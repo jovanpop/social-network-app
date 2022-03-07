@@ -17,10 +17,12 @@ export class PostsService {
         return AllPosts;
     }
     async updatePost(text:string, id: string){
-        await this.postModel.findByIdAndUpdate(id, {text: text})
+        await this.postModel.findByIdAndUpdate(id, {text: text});
+        return "Post Updated" as string;
         }
     async deletePost(id:string){
-        await this.postModel.findByIdAndRemove(id)
+        await this.postModel.findByIdAndDelete(id);
+        return "Post Deleted" as string ;
     }
 }
 
