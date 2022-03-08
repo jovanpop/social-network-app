@@ -6,7 +6,8 @@ export class PostsController {
     constructor (private readonly postsService: PostsService){}
     @Post()
     async addPost(@Body('text') postText: string){
-        const generatedId = await this.postsService.insertPost(postText);
+        const user = "6226a233ec488d8af4671302";
+        const generatedId = await this.postsService.insertPost(postText,user);
         return {id: generatedId};
     }
     @Get()

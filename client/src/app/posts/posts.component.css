@@ -15,13 +15,16 @@
 }
 .postButton{
     background-color: rgba(73, 73, 73, 0.892);
-    border-radius: 5%/50%;
+    border-radius: 3%/50%;
     border: none;
     height: 45px;
-    width: 80%;
+    width: 91%;
     text-align: left;
     font-size: 17px;
     color: whitesmoke;
+    padding-left: 15px;
+    font-weight: 200;
+    margin-left: 10px;
 }
 .postButton:hover{
     background-color: rgba(99, 99, 99, 0.892);
@@ -68,7 +71,6 @@
     width: 35px;
     font-size: 23px;
     font-weight: 100;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: absolute;
     right: 20px;
 }
@@ -85,6 +87,11 @@
     border: none;
     width: 100%;
     outline: none;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.text::placeholder{
+    font-size: 20px;
 }
 li{
     list-style: none;
@@ -94,7 +101,7 @@ li{
 }
 .modalWindow{
     background-color: rgba(38, 38, 38);
-    border: 1px solid rgba(99, 99, 99, 0.289);
+    border: 1px solid rgba(99, 99, 99, 0.392);
 }
 .toggle{
     color: transparent;
@@ -118,4 +125,26 @@ li{
 }
 .modalTitle{
     margin: auto;
+}
+.avatar{
+    width: 45px;
+    border-radius: 50%;
+}
+.user{
+    text-transform: capitalize;
+    position: absolute;
+    left: 80px;
+    top: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.user p{
+    text-transform: none;
+    color: darkgray;
+    font-size: 14px;
+    font-weight: 400;
+}
+.postText{
+    margin-top: 15px;
+    font-size: 16px;
 }

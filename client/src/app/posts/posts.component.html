@@ -1,15 +1,21 @@
 <div class="posts">
-    <div class="post">
+    <div class="post" >
+        <img src="{{avatar}}" class="avatar"/>
         <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind
             ?</button>
         <ng-template #postMethod let-modal>
             <div class="modalWindow">
                 <div class="modal-header">
                     <div class="modalTitle">Create Post</div>
-                    <button type="button"(click)="modal.dismiss('Cross click')" class="closeButton">X</button>
+                    <button type="button" (click)="modal.dismiss('Cross click')" class="closeButton">X</button>
                 </div>
                 <form #postForm="ngForm" (ngSubmit)="create(postForm.value);modal.dismiss('Cross click')">
                     <div class="modal-body">
+                        <img src="{{avatar}}" class="avatar" />
+                        <span class="user">
+                            <span>{{user}}</span>
+                            <p>Public</p>
+                        </span>
                         <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
                             ngModel=""></textarea>
                     </div>
@@ -21,29 +27,38 @@
         </ng-template>
     </div>
     <div class="post" *ngFor="let post of posts">
-        <span>
-            {{post.createdAt}}
-            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
-                <div class="toggle" ngbDropdownToggle>
-                    <button class="options" tabindex="0" id="navbarDropdown3">
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                    </button>
-                </div>
-                <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-                    <button type="button" (click)="openVerticallyCentered(patchMethod)" ngbDropdownItem>Edit</button>
-                    <button type="button" (click)="delete(post._id)" ngbDropdownItem>Delete</button>
-                </div>
-            </li>
+        <img src="{{post.user.picture}}" class="avatar" />
+        <span class="user">
+            <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+            <p>{{post.createdAt}}</p>
         </span>
+        <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
+            <div class="toggle" ngbDropdownToggle>
+                <button class="options" tabindex="0" id="navbarDropdown3">
+                    <i class="fa fa-circle"></i>
+                    <i class="fa fa-circle"></i>
+                    <i class="fa fa-circle"></i>
+                </button>
+            </div>
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                <button type="button" (click)="openVerticallyCentered(patchMethod)" ngbDropdownItem>Edit</button>
+                <button type="button" (click)="delete(post._id)" ngbDropdownItem>Delete</button>
+            </div>
+        </li>
         <ng-template #patchMethod let-modal>
             <div class="modalWindow">
-                <div class="modal-header">Edit Post<button type="button" class="closeButton"
-                        (click)="modal.dismiss('Cross click')">X</button></div>
+                <div class="modal-header">
+                    <div class="modalTitle">Edit Post</div>
+                    <button type="button" class="closeButton" (click)="modal.dismiss('Cross click')">X</button>
+                </div>
                 <form #patchForm="ngForm"
                     (ngSubmit)="update({text:patchForm.value,id:post._id});modal.dismiss('Cross click')">
                     <div class="modal-body">
+                        <img src="{{post.user.picture}}" class="avatar" />
+                        <span class="user">
+                            <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+                            <p>Public</p>
+                        </span>
                         <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
                             ngModel="{{post.text}}"></textarea>
                     </div>
@@ -53,6 +68,6 @@
                 </form>
             </div>
         </ng-template>
-        <div>{{post.text}}</div>
+        <div class="postText">{{post.text}}</div>
     </div>
 </div>

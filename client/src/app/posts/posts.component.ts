@@ -10,6 +10,8 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PostsComponent implements OnInit {
   posts: any[]=[];
   collapsed = true;
+  avatar = "";
+  user = "";
   
   constructor(
     private httpClient: HttpClient,
@@ -26,6 +28,8 @@ export class PostsComponent implements OnInit {
         this.posts.forEach(post=>{
           post.createdAt= new Date(post.createdAt).toDateString()+" at "+new Date(post.createdAt).getHours()+":"+new Date(post.createdAt).getMinutes();
         })
+        this.avatar= this.posts[0].user.picture;
+        this.user= `${this.posts[0].user.first_name} ${this.posts[0].user.last_name}`;
       }
     )
   }

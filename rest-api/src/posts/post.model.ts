@@ -5,14 +5,14 @@ export const PostSchema = new moongose.Schema ({
         type: String,
         required: true
     },
-    // user: {
-    //     type: moongose.Types.ObjectId,
-    //     ref: "user"
-    // }
+    user: {
+        type: moongose.Types.ObjectId,
+        ref: "User"
+    }
 },{timestamps: true});
 
 export interface Post{
     id:string;
     text:string;
-    // user: string;
+    user: string;
 }
