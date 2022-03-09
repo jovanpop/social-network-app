@@ -8,7 +8,7 @@
 .post{
     margin: 10px;
     background-color: rgba(38, 38, 38, 0.892);
-    width: 34%;
+    width: 600px;
     border-radius: 2%/10%;
     padding: 15px;
     position: relative;
@@ -18,13 +18,14 @@
     border-radius: 3%/50%;
     border: none;
     height: 45px;
-    width: 91%;
+    width: 86%;
     text-align: left;
     font-size: 17px;
     color: whitesmoke;
     padding-left: 15px;
     font-weight: 200;
     margin-left: 10px;
+    position: absolute;
 }
 .postButton:hover{
     background-color: rgba(99, 99, 99, 0.892);

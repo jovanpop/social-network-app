@@ -12,6 +12,7 @@ export class PostsComponent implements OnInit {
   collapsed = true;
   avatar = "";
   user = "";
+  username="";
   
   constructor(
     private httpClient: HttpClient,
@@ -32,6 +33,9 @@ export class PostsComponent implements OnInit {
         this.user= `${this.posts[0].user.first_name} ${this.posts[0].user.last_name}`;
       }
     )
+  }
+  userValidation(username:any){
+    this.username=username
   }
   create(post:any){
     this.httpClient.post("http://localhost:4000/posts",post).subscribe(

@@ -1,8 +1,7 @@
 <div class="posts">
     <div class="post" >
         <img src="{{avatar}}" class="avatar"/>
-        <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind
-            ?</button>
+        <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind?</button>
         <ng-template #postMethod let-modal>
             <div class="modalWindow">
                 <div class="modal-header">
@@ -69,5 +68,11 @@
             </div>
         </ng-template>
         <div class="postText">{{post.text}}</div>
+    </div>
+    <div>
+        <form #validateUser="ngForm" (ngSubmit)="userValidation(validateUser.value)">
+            <input type="text" ngModel="" name="username" class="username" placeholder="username"/>
+            <button type="submit">Submit</button>
+        </form>
     </div>
 </div>
