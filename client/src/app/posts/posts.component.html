@@ -1,7 +1,20 @@
+<div [ngClass]="{'login': !userId , 'hidden': userId }">
+    <form #validateUser="ngForm" (ngSubmit)="userValidation(validateUser.value)">
+        <input type="text" ngModel="" name="username" class="username" placeholder="username" /><br/><br/>
+        <button type="submit"  class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div [ngClass]="{'cover': userId , 'hidden': !userId }">
+    <img class="coverPhoto" src="https://images.unsplash.com/photo-1528465424850-54d22f092f9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXIlMjBwaG90b3xlbnwwfHwwfHw%3D&w=1000&q=80"/>
+    <img class = "coverAvatar" src="https://images.unsplash.com/photo-1528465424850-54d22f092f9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXIlMjBwaG90b3xlbnwwfHwwfHw%3D&w=1000&q=80" />
+    <span class="coverName">Jovan Popovski</span>
+</div>
 <div class="posts">
-    <div class="post" >
-        <img src="{{avatar}}" class="avatar"/>
-        <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind?</button>
+    <div [ngClass]="{'post': userId , 'hidden': !userId }">
+        <div >
+            <img src="{{avatar}}" class="avatar" />
+            <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind?</button>
+        </div>
         <ng-template #postMethod let-modal>
             <div class="modalWindow">
                 <div class="modal-header">
@@ -12,7 +25,7 @@
                     <div class="modal-body">
                         <img src="{{avatar}}" class="avatar" />
                         <span class="user">
-                            <span>{{user}}</span>
+                            <span>{{userFullName}}</span>
                             <p>Public</p>
                         </span>
                         <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
@@ -26,9 +39,9 @@
         </ng-template>
     </div>
     <div class="post" *ngFor="let post of posts">
-        <img src="{{post.user.picture}}" class="avatar" />
+        <img src="{{avatar}}" class="avatar" />
         <span class="user">
-            <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+            <span>{{userFullName}}</span>
             <p>{{post.createdAt}}</p>
         </span>
         <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-end">
@@ -53,9 +66,9 @@
                 <form #patchForm="ngForm"
                     (ngSubmit)="update({text:patchForm.value,id:post._id});modal.dismiss('Cross click')">
                     <div class="modal-body">
-                        <img src="{{post.user.picture}}" class="avatar" />
+                        <img src="{{avatar}}" class="avatar" />
                         <span class="user">
-                            <span>{{post.user.first_name}} {{post.user.last_name}}</span>
+                            <span>{{userFullName}}</span>
                             <p>Public</p>
                         </span>
                         <textarea ngbAutoFocus rows="4" name="text" class="text" placeholder="What's on your mind ?"
@@ -67,12 +80,6 @@
                 </form>
             </div>
         </ng-template>
-        <div class="postText">{{post.text}}</div>
-    </div>
-    <div>
-        <form #validateUser="ngForm" (ngSubmit)="userValidation(validateUser.value)">
-            <input type="text" ngModel="" name="username" class="username" placeholder="username"/>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="postText" >{{post.text}}</div>
     </div>
 </div>

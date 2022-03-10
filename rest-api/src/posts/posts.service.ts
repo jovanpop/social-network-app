@@ -8,13 +8,13 @@ export class PostsService {
     constructor(
         @InjectModel('Post') private readonly postModel: Model<Post>,
     ){}
-    async insertPost (text: string,user: string){
-        const newPost = new this.postModel({text,user});
+    async insertPost (text: any){
+        const newPost = new this.postModel(text);
         const post = await newPost.save();
         return post.id as string;
     }
-    async getPosts(){
-        const AllPosts = await this.postModel.find().populate("user");
+    async getPosts(id){
+        const AllPosts = await this.postModel.find({user: id}).populate("user");
         return AllPosts;
     }
     async updatePost(text:string, id: string){

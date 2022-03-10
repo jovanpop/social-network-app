@@ -1,4 +1,4 @@
-import { Controller,Post,Body, Get,Param, Patch, Delete, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Controller,Post,Body, Get,Param, Patch, Delete } from "@nestjs/common";
 import { PostDto } from "./dto/post.dto";
 import { PostsService } from "./posts.service";
 let Filter = require("bad-words");
@@ -8,14 +8,13 @@ export class PostsController {
     constructor (private readonly postsService: PostsService){}
     filter = new Filter({placeHolder:"*"});
     @Post()
-    async addPost(@Body() postText: PostDto){
-        const text = this.filter.clean(postText.text);
-        const generatedId = await this.postsService.insertPost(text,postText.user);
+    async addPost(@Body() text: PostDto){
+        const generatedId = await this.postsService.insertPost(text);
         return {id: generatedId};
     }
-    @Get()
-    async allPosts (){
-        const AllPosts= await this.postsService.getPosts();
+    @Get(":id")
+    async allPosts (@Param("id") id:string){
+        const AllPosts= await this.postsService.getPosts(id);
         return AllPosts;
     }
     @Patch(":id")

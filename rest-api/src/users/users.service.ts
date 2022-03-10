@@ -18,4 +18,8 @@ export class UsersService {
             const user = await newUser.save();
             return user.username as string;
         }
+    async loginUser (username:string){
+        const user = await this.userModel.find({username})
+        return user;
+    }
 }
