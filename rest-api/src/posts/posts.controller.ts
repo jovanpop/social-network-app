@@ -9,7 +9,8 @@ export class PostsController {
     filter = new Filter({placeHolder:"*"});
     @Post()
     async addPost(@Body() text: PostDto){
-        const generatedId = await this.postsService.insertPost(text);
+        const filteredText = this.filter.clean(text.text);
+        const generatedId = await this.postsService.insertPost({text: filteredText, user: text.user});
         return {id: generatedId};
     }
     @Get(":id")
@@ -19,7 +20,8 @@ export class PostsController {
     }
     @Patch(":id")
     async patchPost(@Body() updatedText: PostDto, @Param("id") id: string){
-        await this.postsService.updatePost(updatedText.text,id);
+        const filteredText = this.filter.clean(updatedText.text);
+        await this.postsService.updatePost(filteredText,id);
         return  "Post updated" as string ;
     }
     @Delete(":id")
