@@ -198,14 +198,14 @@ li{
     left: 28%;
     bottom: 13%;
     border: 4px solid rgba(38, 38, 38);
-    z-index: 999;  
+    z-index: 1;  
 }
 .coverName{
     border-radius: 50%;
     position: absolute;
     left: 38%;
     bottom: 26%;
-    z-index: 999;  
+    z-index: 1;  
     font-size: 31px;
     font-weight: 800;
     letter-spacing: 2px;

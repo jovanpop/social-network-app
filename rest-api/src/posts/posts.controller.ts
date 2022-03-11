@@ -22,7 +22,7 @@ export class PostsController {
     async patchPost(@Body() updatedText: PostDto, @Param("id") id: string){
         const filteredText = this.filter.clean(updatedText.text);
         await this.postsService.updatePost(filteredText,id);
-        return  "Post updated" as string ;
+        return  {message:"Post Updated"};
     }
     @Delete(":id")
     async deletePost(@Param("id") id:string){

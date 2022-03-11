@@ -1,16 +1,16 @@
-<div [ngClass]="{'login': !userId , 'hidden': userId }">
+<div class="login" *ngIf="!userId">
     <form #validateUser="ngForm" (ngSubmit)="userValidation(validateUser.value)">
         <input type="text" ngModel="" name="username" class="username" placeholder="username" /><br/><br/>
         <button type="submit"  class="btn btn-primary">Submit</button>
     </form>
 </div>
-<div [ngClass]="{'cover': userId , 'hidden': !userId }">
+<div class="cover" *ngIf="userId">
     <img class="coverPhoto" src="https://images.unsplash.com/photo-1528465424850-54d22f092f9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXIlMjBwaG90b3xlbnwwfHwwfHw%3D&w=1000&q=80"/>
     <img class = "coverAvatar" src="{{avatar}}" />
     <span class="coverName">{{userFullName}}</span>
 </div>
 <div class="posts">
-    <div [ngClass]="{'post': userId , 'hidden': !userId }">
+    <div class="post" *ngIf="userId">
         <div >
             <img src="{{avatar}}" class="avatar" />
             <button type="button" class="postButton" (click)="openVerticallyCentered(postMethod)">What's on your mind?</button>
@@ -21,7 +21,7 @@
                     <div class="modalTitle">Create Post</div>
                     <button type="button" (click)="modal.dismiss('Cross click')" class="closeButton">X</button>
                 </div>
-                <form #postForm="ngForm" (ngSubmit)="create(postForm.value);modal.dismiss('Cross click')">
+                <form #postForm="ngForm" (ngSubmit)="create(postForm.value);modal.dismiss(true)" >
                     <div class="modal-body">
                         <img src="{{avatar}}" class="avatar" />
                         <span class="user">
@@ -64,7 +64,7 @@
                     <button type="button" class="closeButton" (click)="modal.dismiss('Cross click')">X</button>
                 </div>
                 <form #patchForm="ngForm"
-                    (ngSubmit)="update({text:patchForm.value,id:post._id});modal.dismiss('Cross click')">
+                    (ngSubmit)="update({text:patchForm.value,id:post._id});modal.dismiss(true)">
                     <div class="modal-body">
                         <img src="{{avatar}}" class="avatar" />
                         <span class="user">

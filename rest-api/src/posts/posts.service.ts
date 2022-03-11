@@ -14,12 +14,12 @@ export class PostsService {
         return post.id as string;
     }
     async getPosts(id){
-        const AllPosts = await this.postModel.find({user: id}).populate("user");
+        const AllPosts = await this.postModel.find({user: id}).populate("user","username");
         return AllPosts;
     }
     async updatePost(text:string, id: string){
         await this.postModel.findByIdAndUpdate(id, {text: text});
-        return "Post Updated" as string;
+        return {message: "Post Updated"};
         }
     async deletePost(id:string){
         await this.postModel.findByIdAndDelete(id);

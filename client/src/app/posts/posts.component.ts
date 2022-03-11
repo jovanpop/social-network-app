@@ -9,7 +9,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PostsComponent implements OnInit {
   posts: any[] = [];
-  collapsed = true;
   avatar: any;
   user: any;
   userId: any;
@@ -25,9 +24,13 @@ export class PostsComponent implements OnInit {
   getPosts() {
     this.httpClient.get<any>(`http://localhost:4000/posts/${this.userId}`).subscribe(
       res => {
+        console.log(res);
         this.posts = res;
         this.posts.forEach(post => {
-          post.createdAt = new Date(post.createdAt).toDateString() + " at " + new Date(post.createdAt).getHours() + ":" + new Date(post.createdAt).getMinutes();
+          post.createdAt =
+          new Date(post.createdAt).toDateString()
+          + " at " + new Date(post.createdAt).getHours()
+          + ":" + new Date(post.createdAt).getMinutes();
         })
       }
     )
@@ -35,35 +38,37 @@ export class PostsComponent implements OnInit {
   userValidation(username: any) {
     this.httpClient.post("http://localhost:4000/users/login", username).subscribe(
       res => {
+        console.log(res);
         this.user = res
-        if(this.user.length > 0){
-        this.userFullName = `${this.user[0].first_name} ${this.user[0].last_name}`;
-        this.userId = this.user[0]._id;
-        this.avatar = this.user[0].picture;
+        this.userFullName = `${this.user.first_name} ${this.user.last_name}`;
+        this.userId = this.user.id;
+        this.avatar = this.user.picture;
         this.getPosts();
-        }
-      }
+      },err=>alert(err.error.message)
     )
   }
   create(post: any, user=this.userId) {
     this.httpClient.post("http://localhost:4000/posts",{...post,user}).subscribe(
       res => {
+        console.log(res);
         this.getPosts();
-      }
+      },err=>alert(err.error.message)
     )
   }
   delete(id: any) {
     this.httpClient.delete(`http://localhost:4000/posts/${id}`, { responseType: 'text' }).subscribe(
       res => {
+        console.log(res);
         this.getPosts();
       }
     )
   }
   update(post: any) {
-    this.httpClient.patch(`http://localhost:4000/posts/${post.id}`, post.text, { responseType: "text" }).subscribe(
+    this.httpClient.patch(`http://localhost:4000/posts/${post.id}`, post.text).subscribe(
       res => {
+        console.log(res);
         this.getPosts();
-      }
+      },err=>alert(err.error.message)
     )
   }
   openVerticallyCentered(content: any) {
